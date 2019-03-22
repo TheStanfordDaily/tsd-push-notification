@@ -36,17 +36,16 @@ function tsd_push_notification_enable_api() {
 		} else if ( count( $this_user ) == 1 ) {
 			$post_id = $this_user[0]->ID;
 		} else {
-			echo "WARNING: SHOULD NOT HAVE MORE THAN 1 POST WITH SAME NAME";
-			return [];  // TODO: return error;
+			return new WP_Error( 'tsd_pn_error_duplicate_pn_receiver', 'There are more than one PN Receivers with the same token!', [ 'status' => 500 ] );
 		}
 
-		if ( $post_id != -1 ) {
-			foreach ( tsd_pn_get_subscription_types() as $each_type ) {
-				tsd_pn_sub_update_subscription( $post_id, $each_type, $user_subscribing[ $each_type ] );
-			}
+		if ( $post_id === -1 ) {
+			return new WP_Error( 'tsd_pn_unknown_error', 'Unknown error!', [ 'status' => 500 ] );
 		}
 
-		// TODO: return success / error message
+		foreach ( tsd_pn_get_subscription_types() as $each_type ) {
+			tsd_pn_sub_update_subscription( $post_id, $each_type, $user_subscribing[ $each_type ] );
+		}
 		return [];
 	}
 
