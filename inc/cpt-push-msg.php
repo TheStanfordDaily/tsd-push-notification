@@ -2,10 +2,10 @@
 function tsd_add_push_notification_post_type() {
 	// Ref: https://developer.wordpress.org/reference/functions/register_post_type/#comment-351
 	$labels = [
-		'name'                  => 'Push Notifications', // Post type general name
-		'singular_name'         => 'Push Notification', // Post type singular name
-		'menu_name'             => 'Push Notifications', // Admin Menu text
-		'name_admin_bar'        => 'Push Notification', // Add New on Toolbar
+		'name'                  => 'Push Notifications',
+		'singular_name'         => 'Push Notification',
+		'menu_name'             => 'Push Notifications',
+		'name_admin_bar'        => 'Push Notification',
 		'add_new'               => 'Send New',
 		'add_new_item'          => 'Send New Push Notification',
 		'new_item'              => 'New Push Notification',
@@ -16,16 +16,16 @@ function tsd_add_push_notification_post_type() {
 		'parent_item_colon'     => 'Parent Push Notifications:',
 		'not_found'             => 'No Push Notifications found.',
 		'not_found_in_trash'    => 'No Push Notifications found in Trash.',
-		'featured_image'        => 'Push Notification Feature Image', // Overrides the “Featured Image” phrase for this post type. Added in 4.3
-		'set_featured_image'    => 'Set feature image', // Overrides the “Set featured image” phrase for this post type. Added in 4.3
-		'remove_featured_image' => 'Remove feature image', // Overrides the “Remove featured image” phrase for this post type. Added in 4.3
-		'use_featured_image'    => 'Use as feature image', // Overrides the “Use as featured image” phrase for this post type. Added in 4.3
-		'archives'              => 'Push Notification archives', // The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4
-		'insert_into_item'      => 'Insert into Push Notification', // Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4
-		'uploaded_to_this_item' => 'Uploaded to this Push Notification', // Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4
-		'filter_items_list'     => 'Filter Push Notifications list', // Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4
-		'items_list_navigation' => 'Push Notifications list navigation', // Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4
-		'items_list'            => 'Push Notifications list', // Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4
+		'featured_image'        => 'Push Notification Feature Image',
+		'set_featured_image'    => 'Set feature image',
+		'remove_featured_image' => 'Remove feature image',
+		'use_featured_image'    => 'Use as feature image',
+		'archives'              => 'Push Notification archives',
+		'insert_into_item'      => 'Insert into Push Notification',
+		'uploaded_to_this_item' => 'Uploaded to this Push Notification',
+		'filter_items_list'     => 'Filter Push Notifications list',
+		'items_list_navigation' => 'Push Notifications list navigation',
+		'items_list'            => 'Push Notifications list',
 	];
 	$args = [
 		'labels'             => $labels,

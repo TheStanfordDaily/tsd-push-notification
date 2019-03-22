@@ -71,7 +71,6 @@ function tsd_send_expo_push_notification( $receiver_pn_users_ids, $title, $body,
 	}
 
 	tsd_pn_set_admin_notice( 'success', "Response: \n" . json_encode( $decoded_body ) . "\nYour message: \n" . json_encode( $message_body ) );
-	//wp_die( "Notification sent!<br />".$log_content, "Notification sent!", [ "response" => 200, "back_link" => true ] );
 
 	return true;
 }

@@ -35,7 +35,6 @@ function tsd_push_notification_enable_api() {
 			$post_id = tsd_create_new_pn_receiver( $user_token, $user_subscribing[ "category_ids" ], $user_subscribing[ "author_ids" ], $user_subscribing[ "location_ids" ] );
 		} else if ( count( $this_user ) == 1 ) {
 			$post_id = $this_user[0]->ID;
-			tsd_create_update_pn_receiver( $post_id, $user_subscribing[ "category_ids" ], $user_subscribing[ "author_ids" ], $user_subscribing[ "location_ids" ] );
 		} else {
 			echo "WARNING: SHOULD NOT HAVE MORE THAN 1 POST WITH SAME NAME";
 			return [];  // TODO: return error;
@@ -51,28 +50,14 @@ function tsd_push_notification_enable_api() {
 		return [];
 	}
 
-	// TODO: Find better way to store category_ids, author_ids, location_ids.
-
 	function tsd_create_new_pn_receiver( $token, $category_ids = [], $author_ids = [], $location_ids = [] ) {
 		// insert the post and set the category
 		$post_id = wp_insert_post([
 			'post_type' => 'tsd_pn_receiver',
 			'post_title' => $token,
 			'post_status' => "publish",
-			/*'meta_input' => [
-				"category_ids" => json_encode( $category_ids ),
-				"author_ids" => json_encode( $author_ids ),
-				"location_ids" => json_encode( $location_ids ),
-			]*/
 		]);
 		return $post_id;
-	}
-
-	function tsd_create_update_pn_receiver( $post_id, $category_ids, $author_ids, $location_ids ) {
-		// Do nothing.
-		/*update_post_meta( $post_id, 'category_ids', json_encode( $category_ids ) );
-		update_post_meta( $post_id, 'author_ids', json_encode( $author_ids ) );
-		update_post_meta( $post_id, 'location_ids', json_encode( $location_ids ) );*/
 	}
 }
 add_action('init', 'tsd_push_notification_enable_api');
