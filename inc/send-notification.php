@@ -50,7 +50,7 @@ function tsd_send_expo_push_notification( $receiver_pn_users_ids, $title, $body,
 
 	// Ref: https://docs.expo.io/versions/latest/guides/push-notifications/#http2-api
 	// TODO: "an array of up to 100 messages" - need divide 100
-	$response = wp_remote_post( "https://exp.host/--/api/v2/push/send", [
+	$response = wp_safe_remote_post( "https://exp.host/--/api/v2/push/send", [
 		'method' => 'POST',
 		'timeout' => 15,
 		'httpversion' => '2.0',
