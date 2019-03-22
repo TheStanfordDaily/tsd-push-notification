@@ -22,7 +22,7 @@ function tsd_pn_install() {
 
 	$charset_collate = $wpdb->get_charset_collate();
 
-	$sql = "CREATE TABLE $tsd_pn_db_table_name (
+	$sql = "CREATE TABLE IF NOT EXISTS $tsd_pn_db_table_name (
 		id bigint(20) NOT NULL AUTO_INCREMENT,
 		receiver_id bigint(20) unsigned NOT NULL,
 		item_type varchar(20) NOT NULL,
