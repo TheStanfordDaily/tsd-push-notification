@@ -1,11 +1,12 @@
 <?php
 /**
 * Plugin Name: The Stanford Daily - Push Notification
-* Description: Add push notification supports.
+* Description: Add push notification support.
 * Author: The Stanford Daily Tech Team
-* Version: 1.0
+* Version: 1.1
 * History:
 * 1.0 (2019-02-18) - Created. (Yifei He)
+* 1.1 (2019-03-29) - Add PN users information. (Ashwin Ramaswami)
 */
 
 // https://codex.wordpress.org/Creating_Tables_with_Plugins
