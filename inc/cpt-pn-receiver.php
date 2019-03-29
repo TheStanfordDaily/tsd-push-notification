@@ -40,9 +40,7 @@ function tsd_push_notification_receiver_post_type_trash_post( $post_id ) {
 }
 add_action( 'wp_trash_post', 'tsd_push_notification_receiver_post_type_trash_post' );
 
-
-add_action( 'edit_form_after_title', 'myprefix_edit_form_after_title' );
-function myprefix_edit_form_after_title($post) {
+function tsd_push_notification_receiver_post_type_edit_form_after_title($post) {
 	$scr = get_current_screen();
 	if ($post->post_type === 'tsd_pn_receiver') {
 		$data = array(
@@ -54,3 +52,4 @@ function myprefix_edit_form_after_title($post) {
 		echo("<pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre>");
 	}
 }
+add_action( 'edit_form_after_title', 'tsd_push_notification_receiver_post_type_edit_form_after_title' );
