@@ -32,7 +32,7 @@ function tsd_push_notification_enable_api() {
 		] );
 		$post_id = -1;
 		if ( empty( $this_user ) ) {
-			$post_id = tsd_create_new_pn_receiver( $user_token, $user_subscribing[ "category_ids" ], $user_subscribing[ "author_ids" ], $user_subscribing[ "location_ids" ] );
+			$post_id = tsd_create_new_pn_receiver( $user_token );
 		} else if ( count( $this_user ) == 1 ) {
 			$post_id = $this_user[0]->ID;
 		} else {
@@ -49,13 +49,13 @@ function tsd_push_notification_enable_api() {
 		return [];
 	}
 
-	function tsd_create_new_pn_receiver( $token, $category_ids = [], $author_ids = [], $location_ids = [] ) {
+	function tsd_create_new_pn_receiver( $token ) {
 		// insert the post and set the category
-		$post_id = wp_insert_post([
+		$post_id = wp_insert_post( [
 			'post_type' => 'tsd_pn_receiver',
 			'post_title' => $token,
 			'post_status' => "publish",
-		]);
+		] );
 		return $post_id;
 	}
 }
