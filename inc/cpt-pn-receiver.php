@@ -42,12 +42,10 @@ add_action( 'wp_trash_post', 'tsd_push_notification_receiver_post_type_trash_pos
 
 function tsd_push_notification_receiver_post_type_edit_form_after_title($post) {
 	if ( $post->post_type === 'tsd_pn_receiver' ) {
-		$data = [
-			"list" => tsd_pn_sub_get_items_for_receiver( $post->ID, 'list' ),
-			"category_ids" => tsd_pn_sub_get_items_for_receiver( $post->ID, 'category_ids' ),
-			"author_ids" => tsd_pn_sub_get_items_for_receiver( $post->ID, 'author_ids' ),
-			"location_ids" => tsd_pn_sub_get_items_for_receiver( $post->ID, 'location_ids' )
-		];
+		$data = [];
+		foreach ( tsd_pn_get_subscription_types() as $each_sub_type ) {
+			$data[ $each_sub_type ] = tsd_pn_sub_get_items_for_receiver( $post->ID, $each_sub_type );
+		}
 		echo "<pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre>";
 	}
 }
