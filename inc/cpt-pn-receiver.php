@@ -41,15 +41,14 @@ function tsd_push_notification_receiver_post_type_trash_post( $post_id ) {
 add_action( 'wp_trash_post', 'tsd_push_notification_receiver_post_type_trash_post' );
 
 function tsd_push_notification_receiver_post_type_edit_form_after_title($post) {
-	$scr = get_current_screen();
-	if ($post->post_type === 'tsd_pn_receiver') {
-		$data = array(
-			"list" => tsd_pn_sub_get_items_for_receiver($post->ID, 'list'),
-			"category_ids" => tsd_pn_sub_get_items_for_receiver($post->ID, 'category_ids'),
-			"author_ids" => tsd_pn_sub_get_items_for_receiver($post->ID, 'author_ids'),
-			"location_ids" => tsd_pn_sub_get_items_for_receiver($post->ID, 'location_ids')
-		);
-		echo("<pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre>");
+	if ( $post->post_type === 'tsd_pn_receiver' ) {
+		$data = [
+			"list" => tsd_pn_sub_get_items_for_receiver( $post->ID, 'list' ),
+			"category_ids" => tsd_pn_sub_get_items_for_receiver( $post->ID, 'category_ids' ),
+			"author_ids" => tsd_pn_sub_get_items_for_receiver( $post->ID, 'author_ids' ),
+			"location_ids" => tsd_pn_sub_get_items_for_receiver( $post->ID, 'location_ids' )
+		];
+		echo "<pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre>";
 	}
 }
 add_action( 'edit_form_after_title', 'tsd_push_notification_receiver_post_type_edit_form_after_title' );
