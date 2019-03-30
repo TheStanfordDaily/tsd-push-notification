@@ -1,12 +1,12 @@
 <?php
 /**
-* Plugin Name: The Stanford Daily - Push Notification
-* Description: Add push notification support.
-* Author: The Stanford Daily Tech Team
-* Version: 1.0
-* History:
-* 1.0 (2019-02-18 to 2019-03-29) - Created. (He Yifei & Ashwin Ramaswami)
-*/
+ * Plugin Name: TSD Push Notification
+ * Plugin URI: https://github.com/TheStanfordDaily/tsd-push-notification/
+ * Description: Integrates WordPress and Expo Push Notifications.
+ * Author: The Stanford Daily Tech Team
+ * Version: 1.0
+ * Author URI: https://github.com/TheStanfordDaily/
+ */
 
 // https://codex.wordpress.org/Creating_Tables_with_Plugins
 global $wpdb, $tsd_pn_db_version, $tsd_pn_db_table_name;
