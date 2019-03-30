@@ -39,3 +39,14 @@ function tsd_push_notification_receiver_post_type_trash_post( $post_id ) {
 	}
 }
 add_action( 'wp_trash_post', 'tsd_push_notification_receiver_post_type_trash_post' );
+
+function tsd_push_notification_receiver_post_type_edit_form_after_title($post) {
+	if ( $post->post_type === 'tsd_pn_receiver' ) {
+		$data = [];
+		foreach ( tsd_pn_get_subscription_types() as $each_sub_type ) {
+			$data[ $each_sub_type ] = tsd_pn_sub_get_items_for_receiver( $post->ID, $each_sub_type );
+		}
+		echo "<pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre>";
+	}
+}
+add_action( 'edit_form_after_title', 'tsd_push_notification_receiver_post_type_edit_form_after_title' );
