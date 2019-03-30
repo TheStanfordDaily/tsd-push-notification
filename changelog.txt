@@ -1,0 +1,7 @@
+= v 0.1.1 =
+* Display items subscribed by each PN User.
+* Contributor: epicfaace, hesyifei
+
+= v 0.1 =
+* Initial release with basic supports for sending Expo push notifications.
+* Contributor: hesyifei, epicfaace
