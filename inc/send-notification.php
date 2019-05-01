@@ -58,7 +58,7 @@ function tsd_send_expo_push_notification( $receiver_pn_users_ids, $title, $body,
 			'timeout' => 15,
 			'httpversion' => '2.0',
 			'headers' => [ "content-type" => "application/json" ],
-			'body' => json_encode( $all_messages ),
+			'body' => json_encode( $each_messages_chucked ),
 		] );
 	}
 
