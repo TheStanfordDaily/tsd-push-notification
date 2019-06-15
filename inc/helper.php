@@ -1,6 +1,7 @@
 <?php
 function tsd_pn_get_subscription_types() {
-	return [ "list", "category_ids", "author_ids", "location_ids" ];
+	$default_types = [ "list", "category_ids", "author_ids" ];
+	return apply_filters( 'tsd_pn_subscription_types', $default_types );
 }
 
 // Change the `slug` of a term in `tsd_push_msg_receiver_group` (e.g. "breaking") to its `term_id`.

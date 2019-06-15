@@ -30,28 +30,27 @@ function tsd_pn_post_save_post( $post_id, $post ) {
 				$post_authors[] = (int) $each_author->ID;
 			}
 		}
-		foreach ( $post_authors as $each_author ) {
-			$notification_receiver_ids = array_merge( $notification_receiver_ids, tsd_pn_sub_get_receivers_for_item( 'author_ids', $each_author ) );
-		}
 
 		// Categories
-		$post_categories = get_the_category( $post_id );
+		$post_categories_objects = get_the_category( $post_id );
+		$post_categories = [];
 		foreach ( $post_categories as $each_category ) {
-			$each_category_id = $each_category->term_id;
-			$notification_receiver_ids = array_merge( $notification_receiver_ids, tsd_pn_sub_get_receivers_for_item( 'category_ids', $each_category_id ) );
+			$post_categories[] = $each_category->term_id;
 		}
 
-		// Locations
-		$post_tags = get_the_tags( $post_id );
-		$post_tags_slugs = [];
-		foreach ( $post_tags as $each_tag ) {
-			$post_tags_slugs[] = $each_tag->slug;
-		}
-		$post_location_ids = tsd_locations_plugin_get_location_ids_by_tags( $post_tags_slugs );
-		foreach ( $post_location_ids as $each_location_id ) {
-			$notification_receiver_ids = array_merge( $notification_receiver_ids, tsd_pn_sub_get_receivers_for_item( 'location_ids', $each_location_id ) );
-		}
+		$notification_receiver_sources = [
+			'author_ids' => $post_authors,
+			'category_ids' => $post_categories
+		];
+		// https://github.com/TheStanfordDaily/tsd-push-notification/issues/6
+		$notification_receiver_sources = apply_filters( 'tsd_pn_notification_receiver_sources', $notification_receiver_sources, $post_id );
 
+		foreach ( $notification_receiver_sources as $each_type => $each_ids ) {
+			foreach ( $each_ids as $each_id ) {
+				$notification_receiver_ids = array_merge( $notification_receiver_ids, tsd_pn_sub_get_receivers_for_item( $each_type, $each_id ) );
+			}
+		}
+		$notification_receiver_ids = apply_filters( 'tsd_pn_notification_receiver_ids', $notification_receiver_ids, $post_id );
 
 		$notification_receiver_ids = array_unique( $notification_receiver_ids );
 		$notification_title = $post->post_title;
@@ -69,7 +68,8 @@ function tsd_pn_post_save_post( $post_id, $post ) {
 
 		// DEBUG
 		//update_option( "tsd_pn_debug_info", [ date('m/d/Y h:i:s a', time()), $post_authors, $post_categories, $notification_receiver_ids ] );
-		update_option( "tsd_pn_debug_info", array_merge( get_option( "tsd_pn_debug_info" ), [ [ date('m/d/Y h:i:s a', time()), $post_authors, $post_categories, $notification_receiver_ids, $post_tags_slugs, $post_location_ids ] ] ) );
+		// TODO: add_filter to this too
+		update_option( "tsd_pn_debug_info", array_merge( get_option( "tsd_pn_debug_info" ), [ [ date('m/d/Y h:i:s a', time()), $post_authors, $post_categories, $notification_receiver_ids ] ] ) );
 	}
 }
 /**
